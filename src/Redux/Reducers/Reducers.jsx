@@ -1,6 +1,7 @@
 const initialState = { 
   allCategories :[],
-  allProducts : []
+  allProducts : [],
+  cart : JSON.parse(localStorage.getItem("cart_barrilito")) || []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -15,6 +16,13 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           allProducts: action.payload
         };
+        case "ADD_TO_CART":
+          const updatedCart = [...state.cart, action.payload];
+          localStorage.setItem("cart_barrilito", JSON.stringify(updatedCart));
+          return {
+            ...state,
+            cart: updatedCart
+          };
 
     default:
       return state;
