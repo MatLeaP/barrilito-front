@@ -2,6 +2,7 @@ import axios from "axios";
 const category_route = "http://localhost:8080/api/category";
 const product_route = "http://localhost:8080/api/product";
 
+
 export const getAllCategories= () => async(dispatch) => {
     try {
         const response = await axios.get(`${category_route}/list`)
@@ -24,4 +25,11 @@ export const getAllProducts= () => async (dispatch) => {
     } catch (error){
         console.error("Error fetching products: ", error.message);
     }
+}
+
+export const addToCart = (product) => async (dispatch) => {
+    dispatch({
+        type: "ADD_TO_CART",
+        payload: product
+    });
 }
