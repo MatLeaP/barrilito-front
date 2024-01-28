@@ -21,6 +21,11 @@ const NavBar = () => {
                 <button>{category.name}</button>
             </Link>
         ))}
+        <Link to='/cart'>
+                <button>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4sMhvU39qY3Zc4j9F7O6wsSZxHfm-vqIedQ&usqp=CAU" alt="" className='cartImg' />
+                </button>
+        </Link>
         </div>
        
     </div>
