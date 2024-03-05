@@ -1,7 +1,9 @@
 const initialState = { 
   allCategories :[],
   allProducts : [],
-  cart : JSON.parse(localStorage.getItem("cart_barrilito")) || []
+  cart : JSON.parse(localStorage.getItem("cart_barrilito")) || [],
+  isLogged: false,
+  userName : ""
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -18,11 +20,22 @@ const rootReducer = (state = initialState, action) => {
         };
         case "ADD_TO_CART":
           const updatedCart = [...state.cart, action.payload];
-          localStorage.setItem("cart_barrilito", JSON.stringify(updatedCart));
-          return {
+          const newState = {
             ...state,
             cart: updatedCart
           };
+          localStorage.setItem("cart_barrilito", JSON.stringify(newState.cart));
+          return newState;
+
+          case "LOGIN":
+            const {role, userName} = action.payload;
+            const isAdmin = role === "ADMIN";
+            return {
+              ...state,
+              isLogged : true,
+              isAdmin,
+              userName : userName
+            }
 
     default:
       return state;

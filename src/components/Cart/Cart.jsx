@@ -8,16 +8,18 @@ const Cart = () => {
 
   return (
     <div>
-      <Header/>
-    {cart.map(c=>(
+        <Header/>  
+      <h2>Resumen de compra</h2>
       <div>
-      <h3>{c.name}</h3>
-      <p>Precio: {c.price}</p>
-      <img src= {c.img} alt="" />
-      {/* Otros detalles del producto */}
-    </div>
-    ))}
-    </div>
+          {cart.map(c=>(
+          <div>
+              <ul>
+                <li><p>{c.name}  Precio: {c.price}</p></li>
+              </ul>            
+          </div>
+        ))}
+      </div>
+    </div> 
   )
 }
 
