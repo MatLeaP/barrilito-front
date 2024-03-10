@@ -1,7 +1,10 @@
 const initialState = { 
   allCategories :[],
   allProducts : [],
-  cart : JSON.parse(localStorage.getItem("cart_barrilito")) || []
+  cart : JSON.parse(localStorage.getItem("cart_barrilito")) || [],
+  isLoggedIn :false,
+  isAdmin : false,
+  userName : ""
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -23,6 +26,16 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             cart: updatedCart
           };
+
+        case "LOGIN" :
+          const { role, userName } = action.payload;
+          const isAdmin = role === "ADMIN";
+          return {
+            ... state,
+            isLoggedIn : true,
+            isAdmin,
+            userName : userName
+          }
 
     default:
       return state;

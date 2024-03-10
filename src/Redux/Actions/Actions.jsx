@@ -1,7 +1,7 @@
 import axios from "axios";
-const category_route = "http://localhost:8080/api/category";
-const product_route = "http://localhost:8080/api/product";
-
+const category_route = "http://localhost:8080/api/v1/category";
+const product_route = "http://localhost:8080/api/v1/product";
+const auth_route = "http://localhost:8080/api/v1/auth";
 
 export const getAllCategories= () => async(dispatch) => {
     try {
@@ -32,4 +32,20 @@ export const addToCart = (product) => async (dispatch) => {
         type: "ADD_TO_CART",
         payload: product
     });
+}
+
+export const register = (payload) => async (dispatch) => {
+    try{
+        const response = await axios.post(`${auth_route}/register`, payload);
+        localStorage.setItem("token", response.data.token);
+        return dispatch({
+            type: "LOGIN",
+            payload: {
+                role: response.data.user.roles[0],
+                userName: response.data.user.userName
+            }
+        })
+    }catch(error){
+        alert('Username or password is incorrect!')
+    }
 }
