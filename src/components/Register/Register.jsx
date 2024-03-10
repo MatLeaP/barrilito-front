@@ -11,6 +11,7 @@ import {
     Alert,
   } from "react-bootstrap";
 import logo from "../../assets/barrilito imagen.png"
+import { register} from "../../Redux/Actions/Actions"
 
 const  Register = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const  Register = () => {
     const [userPassword, setUserPassword] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [UserConfirmPassword, setUserConfirmPassword] = useState('');
-    const roles = 1;
+    const role = 1;
     const navigate = useNavigate();
 
     const handleRegister = async (e) => {
@@ -30,12 +31,25 @@ const  Register = () => {
         const data = {
             id: null,
             userName: userName,
-            userEmail: userEmail,
-            userFirstName: userFirstName,
-            userLastName: userLastName,
-            userPassword: userPassword,
-            roles: [1],
+            email: userEmail,
+            firstName: userFirstName,
+            lastName: userLastName,
+            country : userCountry,
+            password: userPassword,
+            role: [1],
         }
+
+        dispatch(register(data));
+
+        setUserName("");
+        setUserFirstName("");
+        setUserLastName("");
+        setUserCountry("");
+        setUserEmail("");
+        setUserPassword("");
+        setUserConfirmPassword("");
+        
+        navigate("/");
     }
 
 
@@ -69,31 +83,31 @@ const  Register = () => {
                   placeholder=""
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  requerid
+                  required
                   minLength={6}
                   maxLength={20}
                 />
               </Form.Group>
               <Form.Group controlId="formUserFirstName">
-                <Form.Label>User</Form.Label>
+                <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder=""
                   value={userFirstName}
                   onChange={(e) => setUserFirstName(e.target.value)}
-                  requerid
+                  required
                   minLength={6}
                   maxLength={20}
                 />
               </Form.Group>
               <Form.Group controlId="formUserLastName">
-                <Form.Label>User</Form.Label>
+                <Form.Label>Last name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder=""
                   value={userLastName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  requerid
+                  onChange={(e) => setUserLastName(e.target.value)}
+                  required
                   minLength={6}
                   maxLength={20}
                 />
@@ -132,7 +146,7 @@ const  Register = () => {
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control
                   type="password"
-                  value={confirmUserPassword}
+                  value={userPassword}
                   onChange={(e) => setUserConfirmPassword(e.target.value)}
                   minLength={8}
                   maxLength={20}

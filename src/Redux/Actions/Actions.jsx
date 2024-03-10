@@ -41,8 +41,8 @@ export const register = (payload) => async (dispatch) => {
         return dispatch({
             type: "LOGIN",
             payload: {
-                role: response.data.user.roles[0],
-                userName: response.data.user.userName
+                role: response.data.role,
+                userName: response.data.userName
             }
         })
     }catch(error){
