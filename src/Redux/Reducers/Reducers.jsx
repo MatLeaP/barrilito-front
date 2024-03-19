@@ -34,7 +34,8 @@ const rootReducer = (state = initialState, action) => {
             ... state,
             isLoggedIn : true,
             isAdmin,
-            userName : userName
+            userName : userName,
+            role : role
           }
 
     default:

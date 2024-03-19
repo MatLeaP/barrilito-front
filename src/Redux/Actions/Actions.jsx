@@ -41,11 +41,29 @@ export const register = (payload) => async (dispatch) => {
         return dispatch({
             type: "LOGIN",
             payload: {
-                role: response.data.user.roles[0],
-                userName: response.data.user.userName
+                role: response.data.role,
+                userName: response.data.userName
             }
         })
     }catch(error){
         alert('Username or password is incorrect!')
+    }
+}
+
+export const login = (payload) => async (dispatch) => {
+    try {
+        let response = await axios.post(`${auth_route}/login)`, payload, {
+            headers: { "Content-Type" : "aplicattion/json"},
+        });
+        localStorage.setItem("token", response.data.token)
+        return dispatch({
+            type : "LOGIN",
+            payload : {
+                role: response.data.role,
+                userName: response.data.userName
+            }
+        })
+    } catch (error) {
+        alert(error.response)
     }
 }
