@@ -55,6 +55,7 @@ export const register = (payload) => async (dispatch) => {
             type: "LOGIN",
             payload: {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 role: response.data.user.roles,
                 userName: response.data.user.userName
             }
@@ -66,10 +67,35 @@ export const register = (payload) => async (dispatch) => {
 =======
                 role: response.data.user.roles[0],
                 userName: response.data.user.userName
+=======
+                role: response.data.role,
+                userName: response.data.userName
+>>>>>>> c9ebccdded6f1fd9a5f2e0e3abb67deb5704b28f
             }
         })
     }catch(error){
         alert('Username or password is incorrect!')
     }
 }
+<<<<<<< HEAD
 >>>>>>> c644ad745c0429bcd80187e14d82e7ef7722d25a
+=======
+
+export const login = (payload) => async (dispatch) => {
+    try {
+        let response = await axios.post(`${auth_route}/login)`, payload, {
+            headers: { "Content-Type" : "aplicattion/json"},
+        });
+        localStorage.setItem("token", response.data.token)
+        return dispatch({
+            type : "LOGIN",
+            payload : {
+                role: response.data.role,
+                userName: response.data.userName
+            }
+        })
+    } catch (error) {
+        alert(error.response)
+    }
+}
+>>>>>>> c9ebccdded6f1fd9a5f2e0e3abb67deb5704b28f
